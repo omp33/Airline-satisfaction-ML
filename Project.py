@@ -9,4 +9,19 @@ from tensorflow import keras
 
 # Load the dataset
 data = pd.read_csv('satisfaction train.csv')
-print(data.shape)
+
+#Drop unwanted columns
+data = data.drop(columns=['#','id'])
+
+#Mapping targets to 1 for satistfied and 0 for non satistfied
+
+data['satisfaction'] = data['satisfaction'].map({'satisfied': 1, 'neutral or dissatisfied': 0})
+
+# Split the dataset into features and target
+
+X = data.drop(columns=['satisfaction'])
+y = data['satisfaction']
+
+
+
+
