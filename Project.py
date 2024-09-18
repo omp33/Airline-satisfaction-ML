@@ -11,16 +11,27 @@ from tensorflow import keras
 data = pd.read_csv('satisfaction train.csv')
 
 #Drop unwanted columns
-data = data.drop(columns=['#','id'])
+data = data.drop(columns=['id'],axis=1)
 
-#Mapping targets to 1 for satistfied and 0 for non satistfied
+# One hot encoding for featurs and targets.
 
-data['satisfaction'] = data['satisfaction'].map({'satisfied': 1, 'neutral or dissatisfied': 0})
+data = pd.get_dummies(data, columns=['Gender','Customer Type','Type of Travel','Class','satisfaction',])
+
 
 # Split the dataset into features and target
-
 X = data.drop(columns=['satisfaction'])
 y = data['satisfaction']
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+#Scaling features
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+#
+
 
 
 
