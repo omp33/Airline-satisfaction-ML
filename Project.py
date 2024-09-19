@@ -17,6 +17,7 @@ data = pd.read_csv('satisfaction train.csv')
 # Check for NaN values
 print("Checking for NaN values in the dataset:")
 print(data.isnull().sum())
+data['Arrival Delay in Minutes'] = data['Arrival Delay in Minutes'].fillna(data['Arrival Delay in Minutes'].mean())
 
 # Drop unwanted columns
 data = data.drop(columns=['id'], axis=1)
