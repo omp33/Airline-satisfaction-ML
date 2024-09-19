@@ -114,9 +114,4 @@ plt.legend()
 
 plt.show()
 
-# SHAP interpretation for mean SHAP plot
-explainer = shap.KernelExplainer(model.predict, X_train_scaled[:100])  # Using first 100 rows for speed
-shap_values = explainer.shap_values(X_test_scaled[:100])  # Speed up using 100 rows
 
-# SHAP summary plot (mean SHAP value plot)
-shap.summary_plot(shap_values, X_test_scaled[:100], plot_type="bar")
