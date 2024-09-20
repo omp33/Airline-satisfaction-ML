@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+import pickle
 
 # Load your dataset (assuming it's preprocessed as shown earlier)
 data = pd.read_csv('satisfaction train.csv')
@@ -81,3 +82,9 @@ for fold, (train_index, test_index) in enumerate(skf.split(X, y), 1):
 
 # Overall metrics after 10 folds
 print(f"Average Accuracy over 10 folds: {np.mean(accuracy_scores)}")
+
+# Save the trained model using pickle
+model_filename = 'lgbm_model.pkl'
+with open(model_filename, 'wb') as file:
+    pickle.dump(lgbm, file)
+
